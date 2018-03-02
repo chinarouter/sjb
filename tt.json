@@ -1,0 +1,25 @@
+{
+	"name":	"fruit",
+	"color":	1111,
+	"local":	[1, 2],
+	"creams":	
+	[
+	  {
+			"name":	"cream1",
+			"sweetness":	0,
+			"picture":	"5152535455"
+		}, 
+		{
+			"name":	"cream2",
+			"sweetness":	0,
+			"picture":	""
+		}
+  ],
+	"cream":	
+	{
+		"name":	"cream11",
+		"sweetness":	0,
+		"picture":	"1112131415"
+	}
+}
+
