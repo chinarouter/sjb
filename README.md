@@ -17,7 +17,7 @@ STRUCT(cream)               /* defined struct and sjb_bind_cream function */
 
 STRUCT(fruit)                 /* defined struct and sjb_bind_fruit function */
 {
-	STRING(name, 8);            /*  - char name[8]  */
+  STRING(name, 8);            /*  - char name[8]  */
   FIELD(int , color);         /*  - int color     */
   ARRAY(int, local, 2);       /*  - int local[2]  and int __local */
   ARRAY(cream, creams, 4);    /*  - cream creams[4]  and int __creams */
@@ -44,7 +44,7 @@ extern void sjb_bind_fruit(cJSON* json  /* json tree */
               
 test.c - sample code use sjb_struct_api.h;
 
-sjb_bind_cream(json, 1, &c, 0, 0);
+sjb_bind_cream(json, 0, &c, 0, 0);
 
 ```
 
