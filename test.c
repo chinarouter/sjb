@@ -37,8 +37,8 @@ int main(int argc, char *argv[])
   snprintf(f.name, sizeof(f.name), "%s", "fruit");
   f.color = 33333;
   f.__local = 2;
-  f.local[0] = 1;
-  f.local[1] = 2;
+  f.local[0] = 1.111;
+  f.local[1] = 2.222;
   
   f.__creams = 2;
   snprintf(f.creams[0].name, sizeof(f.creams[0].name), "%s", "cream1");
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
   
   printf("fr.name:[%s]\n", 	fr.name);
   printf("fr.color:[%d]\n", 	fr.color);
-  printf("fr.local:%d, [%d,%d]\n", 	fr.__local, fr.local[0], fr.local[1]);
+  printf("fr.local:%d, [%f,%f]\n", 	fr.__local, fr.local[0], fr.local[1]);
   
   printf("fr.__creams:[%d]\n", 	fr.__creams);
   for(i = 0; i < fr.__creams; i++)

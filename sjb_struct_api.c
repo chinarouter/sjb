@@ -18,6 +18,21 @@ void sjb_bind_int(cJSON* json, int m, int *str, int i, int size)
     cJSON_SetIntValue(json, *(str+i));
   }
 }
+
+void sjb_bind_short(cJSON* json, int m, short *str, int i, int size) 
+{
+  if(m)
+  {
+    if( json && json->type == cJSON_Number)
+    			*(str+i) = json->valueint;
+  }
+  else
+  {
+    json->type=cJSON_Number;
+    cJSON_SetIntValue(json, *(str+i));
+  }
+}
+
 void sjb_bind_char(cJSON* json, int m, char *str, int i, int size) 
 {
   if(m)
@@ -31,6 +46,36 @@ void sjb_bind_char(cJSON* json, int m, char *str, int i, int size)
     cJSON_SetIntValue(json, *(str+i));
   }
 }
+
+void sjb_bind_float(cJSON* json, int m, float *str, int i, int size) 
+{
+  if(m)
+  {
+    if( json && json->type == cJSON_Number)
+    			*(str+i) = json->valuedouble;
+  }
+  else
+  {
+    json->type=cJSON_Number;
+    cJSON_SetIntValue(json, *(str+i));
+  }
+}
+
+
+void sjb_bind_double(cJSON* json, int m, double *str, int i, int size) 
+{
+  if(m)
+  {
+    if( json && json->type == cJSON_Number)
+    			*(str+i) = json->valuedouble;
+  }
+  else
+  {
+    json->type=cJSON_Number;
+    cJSON_SetIntValue(json, *(str+i));
+  }
+}
+
 void sjb_bind_string(cJSON* json, int m, char *str, int i, int size) 
 {
   if(m)

@@ -1,7 +1,7 @@
 {
 	"name":	"fruit",
 	"color":	1111,
-	"local":	[1, 2],
+	"local":	[111.1111, 222.22222],
 	"creams":	
 	[
 	  {

@@ -9,7 +9,7 @@ STRUCT(fruit)
 {
 	STRING(name, 8);
   FIELD(int , color);
-  ARRAY(int, local, 2);
+  ARRAY(double, local, 2);
   ARRAY(cream, creams, 4);
   FIELD(cream, cream);
 };
