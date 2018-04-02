@@ -81,19 +81,22 @@ void sjb_bind_string(cJSON* json, int m, char *str, int i, int size)
   if(m)
   {
 		if( json && json->type == cJSON_String)
-			strncpy(str, json->valuestring, size);
+			strncpy((char*)str + i*size, json->valuestring, size);
   }
   else
   {
     json->type = cJSON_String;
-    cJSON_SetStrValue(json, str);
+    cJSON_SetStrValue(json, (char*)str + i*size);
   }
 }
+
+
+
 void sjb_bind_binary(cJSON* json, int m, int *str, int i, int size) 
 {
   int ii = 0;
   int *n = str++;
-  if(m)
+  if(m) // from json;
   {
 		if( json && json->type == cJSON_String)
 		{
@@ -109,7 +112,7 @@ void sjb_bind_binary(cJSON* json, int m, int *str, int i, int size)
 		  }
 		}
   }
-  else
+  else  // to json;
   {
     json->type = cJSON_String;
     if(*n > 0)
@@ -129,7 +132,7 @@ void sjb_bind_binary(cJSON* json, int m, int *str, int i, int size)
 }
 
 // Êý×é°ó¶¨;
-void sjb_array_bind(cJSON* json, int m, int *str, char *tag, int size, sjb_bind_T *cb)
+void sjb_bind_array(cJSON* json, int m, int *str, char *tag, int size, sjb_bind_T *cb, int esize)
 {
   int i = 0;
   int *n = str++;
@@ -143,7 +146,7 @@ void sjb_array_bind(cJSON* json, int m, int *str, char *tag, int size, sjb_bind_
     		for ( i=0; i<*n; i++)
     		{
     			cJSON* child=cJSON_GetArrayItem(arr,i);
-    			cb(child, m, str, i, size);
+    			cb(child, m, str, i, esize);
     		}
   	  }
   	}
@@ -154,7 +157,7 @@ void sjb_array_bind(cJSON* json, int m, int *str, char *tag, int size, sjb_bind_
   		for ( i=0; i<*n; i++)
   		{
   			cJSON* jani = cJSON_CreateObject();
-  			cb(jani, m, str, i, size);
+  			cb(jani, m, str, i, esize);
   			cJSON_AddItemToArray(arr, jani);
   		}
   	}
@@ -175,7 +178,10 @@ void sjb_array_bind(cJSON* json, int m, int *str, char *tag, int size, sjb_bind_
   else {cJSON* jani = cJSON_CreateObject(); sjb_bind_binary( jani, m, (int*)&(str+i)-> __##HOLDER, 0, SIZE); cJSON_AddItemToObject(json, #HOLDER, jani);}\
 }while(0)
 
-#define ARRAY(TYPE,HOLDER,SIZE) sjb_array_bind(  json, m, (int*)&(str+i)-> __##HOLDER, #HOLDER, SIZE, (sjb_bind_T*)sjb_bind_##TYPE)
+#define ARRAY(TYPE,HOLDER,SIZE) sjb_bind_array(json, m, (int*)&(str+i)-> __##HOLDER, #HOLDER, SIZE, (sjb_bind_T*)sjb_bind_##TYPE, sizeof(TYPE))
+
+#define ARRAYSTR(HOLDER,SIZE,ESIZE) sjb_bind_array(json, m, (int*)&(str+i)-> __##HOLDER, #HOLDER, SIZE, (sjb_bind_T*)sjb_bind_string, ESIZE)
+
 
 
 #include "sjb_struct_def.h"
@@ -185,3 +191,4 @@ void sjb_array_bind(cJSON* json, int m, int *str, char *tag, int size, sjb_bind_
 #undef FIELD
 #undef ARRAY
 #undef BINARY
+#undef ARRAYSTR

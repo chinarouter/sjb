@@ -40,6 +40,10 @@ int main(int argc, char *argv[])
   f.local[0] = 1.111;
   f.local[1] = 2.222;
   
+  f.__fruitstrarray = 2;
+  snprintf(f.fruitstrarray[0], sizeof(f.fruitstrarray[0]), "%s", "fruitstr1111");
+  snprintf(f.fruitstrarray[1], sizeof(f.fruitstrarray[1]), "%s", "fruitstr2222");
+  
   f.__creams = 2;
   snprintf(f.creams[0].name, sizeof(f.creams[0].name), "%s", "cream1");
   snprintf(f.creams[1].name, sizeof(f.creams[1].name), "%s", "cream2");
@@ -47,11 +51,15 @@ int main(int argc, char *argv[])
   f.creams[0].__picture = 5;
   memset(f.creams[0].picture, 0x51, sizeof(f.creams[0].picture));
 
+  f.creams[0].__creamstrarray = 3;
+  snprintf(f.creams[0].creamstrarray[0], sizeof(f.creams[0].creamstrarray[0]), "%s", "creamstrarray111");
+  snprintf(f.creams[0].creamstrarray[1], sizeof(f.creams[0].creamstrarray[1]), "%s", "creamstrarray222");
+
   snprintf(f.cream.name, sizeof(f.cream.name), "%s", "cream11111111");
   f.cream.__picture = 3;
   memset(f.cream.picture, 0x11, sizeof(f.cream.picture));
   
-  printf("\n>>>>>>>>>>>\n");
+  printf("\n>>>>> create json >>>>>>\n");
   cJSON* out = cJSON_CreateObject();
 
   sjb_bind_fruit(out, 0, &f, 0, 0);
@@ -60,7 +68,7 @@ int main(int argc, char *argv[])
 
 	cJSON_Delete(out);
   #endif
-  printf("\n>>>>>>>>>>>\n");
+  printf("\n>>>> parse tt.json >>>>>>>\n");
   
   int i, j, k;
   fruit fr;
@@ -88,6 +96,9 @@ int main(int argc, char *argv[])
       strcat(spic, t);
     }
     printf("fr.creams[%d].picture[%s]\n", i, spic);
+    
+    printf("fr.creams[%d].__creamstrarray[%d]\n", i, fr.creams[i].__creamstrarray);
+    printf("fr.creams[%d].creamstrarray[%s]\n", i, fr.creams[i].creamstrarray[i]);
   }
   
   printf("fr.cream.name:[%s]\n", 	fr.cream.name);

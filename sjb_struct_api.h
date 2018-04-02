@@ -22,6 +22,7 @@
 #define FIELD(X,Y)    X Y
 #define ARRAY(X,Y,Z)  int __##Y; X Y[Z]
 #define BINARY(X,Y)   int __##X; char X[Y]
+#define ARRAYSTR(X,Y,Z) int __##X; char X[Y][Z]
 
 #include "sjb_struct_def.h"
 
@@ -30,5 +31,6 @@
 #undef FIELD
 #undef ARRAY
 #undef BINARY
+#undef ARRAYSTR
 
 #endif //__sjb_struct_api_h__
