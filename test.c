@@ -23,8 +23,11 @@ cJSON* _cJSON_CreateNode(cJSON* json, const char* name)
 void _cJSON_Print(cJSON* json, FILE* out)
 {
 	char* print = cJSON_Print(json);
-	fprintf( out, "%s", print);
-	free(print);
+	if(print)
+	{
+	  fprintf( out, "%s", print);
+	  free(print);
+	}
 }
 
 int main(int argc, char *argv[])
@@ -55,9 +58,31 @@ int main(int argc, char *argv[])
   snprintf(f.creams[0].creamstrarray[0], sizeof(f.creams[0].creamstrarray[0]), "%s", "creamstrarray111");
   snprintf(f.creams[0].creamstrarray[1], sizeof(f.creams[0].creamstrarray[1]), "%s", "creamstrarray222");
 
+  f.creams[0].__int2 = 3;
+  f.creams[0].int2[0][0] = 61; f.creams[0].int2[0][1] = 62;
+  f.creams[0].int2[1][0] = 71; f.creams[0].int2[1][1] = 72;
+  f.creams[0].int2[2][0] = 81; f.creams[0].int2[2][1] = 82;
+
+  f.creams[0].__int3 = 3;
+  f.creams[0].int3[0][0][0] = 61; f.creams[0].int3[0][0][1] = 62;
+  f.creams[0].int3[1][0][0] = 71; f.creams[0].int3[1][0][1] = 72;
+  f.creams[0].int3[2][0][0] = 81; f.creams[0].int3[2][0][1] = 82;
+
+
+  f.creams[1].__string3 = 2;
+  strcpy(f.creams[1].string3[0][1], "f.creams_1.string3_0_1");
+  
+
   snprintf(f.cream.name, sizeof(f.cream.name), "%s", "cream11111111");
   f.cream.__picture = 3;
   memset(f.cream.picture, 0x11, sizeof(f.cream.picture));
+  
+  f.cream.__string3 = 2;
+  strcpy(f.cream.string3[0][0], "f.creams_1.string3_0_0");
+  strcpy(f.cream.string3[0][1], "f.creams_1.string3_0_1");
+  strcpy(f.cream.string3[1][0], "f.creams_1.string3_1_0");
+  strcpy(f.cream.string3[1][1], "f.creams_1.string3_1_1");
+  
   
   printf("\n>>>>> create json >>>>>>\n");
   cJSON* out = cJSON_CreateObject();
@@ -99,6 +124,13 @@ int main(int argc, char *argv[])
     
     printf("fr.creams[%d].__creamstrarray[%d]\n", i, fr.creams[i].__creamstrarray);
     printf("fr.creams[%d].creamstrarray[%s]\n", i, fr.creams[i].creamstrarray[i]);
+    
+    printf("fr.creams[%d].__int2[%d]\n", i, fr.creams[i].__int2);
+    printf("fr.creams[%d].int2[ [%d, %d], [%d, %d]]\n", i
+        , fr.creams[i].int2[0][0], fr.creams[i].int2[0][1]
+        , fr.creams[i].int2[1][0], fr.creams[i].int2[1][1]);
+    
+    
   }
   
   printf("fr.cream.name:[%s]\n", 	fr.cream.name);
@@ -110,5 +142,23 @@ int main(int argc, char *argv[])
     strcat(spic, t);
   }
   printf("fr.cream.picture[%s]\n", spic);
+  
+  printf("fr.cream.__string3[%d]\n", fr.cream.__string3);
+  printf("fr.cream.string3[ [%s, %s], [%s, %s]]\n"
+      , fr.cream.string3[0][0], fr.cream.string3[0][1]
+      , fr.cream.string3[1][0], fr.cream.string3[1][1]);
+  
+  
+  printf("fr.cream.__int3[%d]\n", fr.cream.__int3);
+  printf("fr.cream.int3[ \n"
+                        "[ [%d, %d] ] \n"
+                        "[ [%d, %d] ] \n"
+                        "[ [%d, %d] ] \n"
+                      "]\n"
+      , fr.cream.int3[0][0][0], fr.cream.int3[0][0][1]
+      , fr.cream.int3[1][0][0], fr.cream.int3[1][0][1]
+      , fr.cream.int3[2][0][0], fr.cream.int3[2][0][1]
+      );
+  printf("test OK.\n");
   return 0;
 }

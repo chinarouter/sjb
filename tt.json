@@ -8,7 +8,15 @@
 			"name":	"cream1",
 			"sweetness":	0,
 			"picture":	"5152535455",
-			"creamstrarray" : ["creamstr1111", "creamstr2222", "creamstr33333", "creamstr4444", "creamstr5555"]
+			"creamstrarray" : ["creamstr1,1,1,1", 
+			                   "creamstr2,2,2,2", 
+			                   "creamstr3,3,3,3,3", 
+			                   "creamstr4444", 
+			                   "creamstr5555"
+			                  ],
+			"int2" : [ [1111,2222 ], 
+			           [3333, 4444]
+			         ]
 		}, 
 		{
 			"name":	"cream2",
@@ -20,7 +28,15 @@
 	{
 		"name":	"cream11",
 		"sweetness":	0,
-		"picture":	"1112131415"
+		"picture":	"1112131415",
+		"string3" : [ 
+		              ["f.cream.string3_0_0", "f.cream.string3_0_1"], 
+		              ["f.cream.string3_1_0", "f.cream.string3_1_1"] 
+		            ],
+		"int3" : [ [ [11, 12, 88] ],
+		           [ [21, 22, 88] ], 
+		           [ [31, 32, 88] ] 
+		         ]
 	}
 }
 

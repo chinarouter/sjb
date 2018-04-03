@@ -3,7 +3,10 @@ STRUCT(cream)
   STRING(name, 8);
   FIELD(int , sweetness);
   BINARY(picture, 1024);
-  ARRAYSTR(creamstrarray, 4, 32);
+  ARRAY2(string, creamstrarray, 4, 32);
+  ARRAY2(int, int2, 4, 3);
+  ARRAY3(int, int3, 4, 2, 8);
+  ARRAY3(string, string3, 4, 2, 64);
 };
 
 STRUCT(fruit)
@@ -12,7 +15,7 @@ STRUCT(fruit)
   FIELD(int , color);
   ARRAY(double, local, 2);
   ARRAY(cream, creams, 4);
-  ARRAYSTR(fruitstrarray, 4, 32);
+  ARRAY2(string, fruitstrarray, 4, 32);
   FIELD(cream, cream);
 };
 

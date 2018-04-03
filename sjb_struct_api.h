@@ -17,12 +17,14 @@
                                     , int i                   /* 0 */ \
                                     , int size);              /* 0 */ \
                      struct _##TYPE
-                     
+                 
+#define string char
 #define STRING(X,Y)   char X[Y]
 #define FIELD(X,Y)    X Y
 #define ARRAY(X,Y,Z)  int __##Y; X Y[Z]
+#define ARRAY2(X,Y,Z,D) int __##Y; X Y[Z][D]
+#define ARRAY3(X,Y,Z,D,F) int __##Y; X Y[Z][D][F]
 #define BINARY(X,Y)   int __##X; char X[Y]
-#define ARRAYSTR(X,Y,Z) int __##X; char X[Y][Z]
 
 #include "sjb_struct_def.h"
 
@@ -31,6 +33,8 @@
 #undef FIELD
 #undef ARRAY
 #undef BINARY
-#undef ARRAYSTR
+#undef ARRAY2
+#undef ARRAY3
+#undef string
 
 #endif //__sjb_struct_api_h__
