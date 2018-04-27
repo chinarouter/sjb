@@ -1,6 +1,8 @@
 #include "sjb_struct_api.h"
 
+#ifndef DEBUG
 #define printf(...)
+#endif
 
 // ÀàÐÍ°ó¶¨;
 #define STRUCT(TYPE) void sjb_bind_##TYPE(cJSON* json, int m, TYPE *str, int i, int size)
@@ -77,6 +79,29 @@ void sjb_bind_double(cJSON* json, int m, double *str, int i, int size)
     cJSON_SetIntValue(json, *(str+i));
   }
 }
+
+typedef unsigned long long uint64;
+
+void sjb_bind_uint64(cJSON* json, int m, uint64 *str, int i, int size) 
+{  
+  if(m)
+  {
+		if( json && json->type == cJSON_String)
+    {
+		  *(str+i) = strtoull(json->valuestring, NULL, 16);
+      printf("json >>>>>> struct: valuestring[%s], uint64[%llx]\n", json->valuestring, *(str+i));
+    }
+  }
+  else
+  {
+    json->type = cJSON_String;
+    char t[64];
+    sprintf(t, "%llx", *(str+i));
+    cJSON_SetStrValue(json, t);
+    printf("struct >>>>>> json: t[%s], uint64[%llx]\n", t, *(str+i));
+  }
+}
+
 
 void sjb_bind_string(cJSON* json, int m, char *str, int i, int size) 
 {
@@ -218,26 +243,33 @@ void sjb_bind_array(cJSON* json, int m, char *str, int size, int* sub, sjb_bind_
   else {cJSON* jani = cJSON_CreateObject(); sjb_bind_##TYPE( jani, m, &(str+i)-> HOLDER, 0, 1); cJSON_AddItemToObject(json, #HOLDER, jani);}\
 }while(0)
 
+
+#ifdef __ELE
+#define __ELE_SIZE(HOLDER,SIZE)  int *n = (int*)&(str+i)-> __##HOLDER
+#else
+#define __ELE_SIZE(HOLDER,SIZE)  int _n = SIZE; int *n = &_n;
+#endif
+
 #define BINARY(HOLDER,SIZE)      do { \
-  int *n = (int*)&(str+i)-> __##HOLDER;\
+  __ELE_SIZE(HOLDER,SIZE); \
   if (m) { if(!json) break;  cJSON* jani = cJSON_GetObjectItem(json, #HOLDER); if(!jani) break;\
       *n = strlen(jani->valuestring)/2; *n = (*n > SIZE)?SIZE:*n;\
-      sjb_bind_binary( jani, m, (char*)(n+1), 0, *n);}\
+      sjb_bind_binary( jani, m, (char*)((str+i)-> HOLDER), 0, *n);}\
   else {cJSON* jani = cJSON_CreateObject(); \
-      sjb_bind_binary( jani, m, (char*)(n+1), 0, *n); \
+      sjb_bind_binary( jani, m, (char*)((str+i)-> HOLDER), 0, *n); \
       cJSON_AddItemToObject(json, #HOLDER, jani);}\
 }while(0)
 
 #define __ARRAY(TYPE,HOLDER,SIZE,SUB,TSIZE) do { \
-  int *n = (int*)&(str+i)-> __##HOLDER; \
+  __ELE_SIZE(HOLDER,SIZE); \
   if(m) { if(!json) break; cJSON* jani = cJSON_GetObjectItem(json, #HOLDER); if(!jani) break;\
       *n = cJSON_GetArraySize(jani); *n = (*n > SIZE)?SIZE:*n;\
       printf("<<<<<< @@@ %s [%d] @@@\n", #HOLDER, *n);\
-      sjb_bind_array(jani, m, (char*)(n+1), *n, SUB, (sjb_bind_T*)sjb_bind_##TYPE, TSIZE);}\
+      sjb_bind_array(jani, m, (char*)((str+i)-> HOLDER), *n, SUB, (sjb_bind_T*)sjb_bind_##TYPE, TSIZE);}\
   else {cJSON* jani = cJSON_CreateArray(); \
   		printf(">>>>>> @@@ %s [%d] @@@\n", #HOLDER, *n);\
   		cJSON_AddItemToObject(json, #HOLDER, jani);\
-      sjb_bind_array( jani, m, (char*)(n+1), *n, SUB, (sjb_bind_T*)sjb_bind_##TYPE, TSIZE);}\
+      sjb_bind_array( jani, m, (char*)((str+i)-> HOLDER), *n, SUB, (sjb_bind_T*)sjb_bind_##TYPE, TSIZE);}\
 }while(0)
 
 typedef char string;
@@ -270,3 +302,4 @@ typedef char string;
 #undef ARRAY2
 #undef ARRAY3
 #undef string
+#undef uint64

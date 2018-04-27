@@ -1,12 +1,14 @@
 {
 	"name":	"fruit",
 	"color":	1111,
-	"local":	[111.1111, 222.22222],
+	"local":	[1.1, 2.2],
 	"creams":	
 	[
 	  {
 			"name":	"cream1",
-			"sweetness":	0,
+			"sweetness":	-1,
+			"sweetness64": "fffffffffffffff1",
+			"array64" : [ "fffffffffffffff1", "fffffffffffffff2", "fffffffffffffff3"],
 			"picture":	"5152535455",
 			"creamstrarray" : ["creamstr1,1,1,1", 
 			                   "creamstr2,2,2,2", 
@@ -21,6 +23,7 @@
 		{
 			"name":	"cream2",
 			"sweetness":	0,
+		  "array64" : [ "f2fffffffffffff1", "f2fffffffffffff2", "f2fffffffffffff3"],
 			"picture":	""
 		}
   ],

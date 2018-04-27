@@ -2,7 +2,9 @@ STRUCT(cream)
 {
   STRING(name, 8);
   FIELD(int , sweetness);
-  BINARY(picture, 1024);
+  FIELD(uint64 , sweetness64);
+  ARRAY(uint64 , array64, 3);
+  BINARY(picture, 512);
   ARRAY2(string, creamstrarray, 4, 32);
   ARRAY2(int, int2, 4, 3);
   ARRAY3(int, int3, 4, 2, 8);
