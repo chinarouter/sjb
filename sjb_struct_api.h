@@ -10,10 +10,6 @@
 #include <stdlib.h>
 #include "cJSON/cJSON.h"
 
-#if 0
-#define DEBUG // for printf;
-#define __ELE // for int __ele;
-#endif
 
 #define STRUCT(TYPE) typedef struct _##TYPE TYPE;\
                      extern void sjb_bind_##TYPE(cJSON* json  /* sjb_bind_TYPE */ \
@@ -28,10 +24,15 @@
 #define STRING(X,Y)   char X[Y]
 #define FIELD(X,Y)    X Y
 
-#ifdef __ELE
-#define __ELE_DEF(e) int __##e;
+#ifdef __ELE__
+#define __ELE_DEF(e)  int e##__;
+#define ELE_VAL(e)    e##__
+#define ELE_SIZE(e)   e##__
 #else
 #define __ELE_DEF(e)
+static  int __ele__;  //dummy;
+#define ELE_VAL(e)    __ele__
+#define ELE_SIZE(e)   (sizeof(e)/sizeof(e[0]))
 #endif
 
 #define ARRAY(X,Y,Z)      __ELE_DEF(Y) X Y[Z]

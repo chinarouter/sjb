@@ -244,8 +244,8 @@ void sjb_bind_array(cJSON* json, int m, char *str, int size, int* sub, sjb_bind_
 }while(0)
 
 
-#ifdef __ELE
-#define __ELE_SIZE(HOLDER,SIZE)  int *n = (int*)&(str+i)-> __##HOLDER
+#ifdef __ELE__
+#define __ELE_SIZE(HOLDER,SIZE)  int *n = (int*)&(str+i)-> HOLDER##__
 #else
 #define __ELE_SIZE(HOLDER,SIZE)  int _n = SIZE; int *n = &_n;
 #endif

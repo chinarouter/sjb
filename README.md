@@ -11,7 +11,7 @@ STRUCT(cream)               /* defined struct and sjb_bind_cream function */
 {
   STRING(name, 8);          /* - char name[8] */
   FIELD(int , sweetness);   /* - int sweetness */
-  BINARY(picture, 1024);    /* - char picture[1024]  and int __picture */
+  BINARY(picture, 1024);    /* - char picture[1024]  and int picture__ */
 };
 
 
@@ -19,8 +19,8 @@ STRUCT(fruit)                 /* defined struct and sjb_bind_fruit function */
 {
   STRING(name, 8);            /*  - char name[8]  */
   FIELD(int , color);         /*  - int color     */
-  ARRAY(int, local, 2);       /*  - int local[2]  and int __local */
-  ARRAY(cream, creams, 4);    /*  - cream creams[4]  and int __creams */
+  ARRAY(int, local, 2);       /*  - int local[2]  and int local__ */
+  ARRAY(cream, creams, 4);    /*  - cream creams[4]  and int creams__ */
   FIELD(cream, cream);        /*  - cream cream */
 };
 
