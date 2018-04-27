@@ -1,5 +1,5 @@
 /*
-* simple josn binding
+* simple json binding
 * email: 25088970@qq.com
 */
 
