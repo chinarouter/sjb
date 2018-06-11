@@ -141,7 +141,7 @@ int main(int argc, char *argv[])
     }
     
     printf("fr.creams[%d].picture[%d]\n", i, ELE_SIZE(fr.creams[i].picture));
-    char spic[1024] = {0};
+    char spic[ELE_SIZE(fr.creams[i].picture)*2 + 1] = {0};
     for(j = 0; j < ELE_SIZE(fr.creams[i].picture); j++)
     {
       char t[4];sprintf(t, "%02X", fr.creams[i].picture[j]);
@@ -162,7 +162,7 @@ int main(int argc, char *argv[])
   
   printf("fr.cream.name:[%s]\n", 	fr.cream.name);
   printf("fr.cream.picture:[%d]\n", 	ELE_SIZE(fr.cream.picture));
-  char spic[1024] = {0};
+  char spic[ELE_SIZE(fr.cream.picture)*2 + 1] = {0};
   for(j = 0; j < ELE_SIZE(fr.cream.picture); j++)
   {
     char t[4];sprintf(t, "%02X", fr.cream.picture[j]);

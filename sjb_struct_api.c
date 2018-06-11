@@ -141,7 +141,8 @@ void sjb_bind_binary(cJSON* json, int m, char *str, int i, int size)
     json->type = cJSON_String;
     if(size > 0)
     {
-      char *e = (char*)malloc(size*2);
+      char *e = (char*)malloc(size*2 + 1);
+      e[0] = '\0';
       for(j = 0; j < size; j++)
       {
         char t[4]; sprintf(t, "%02X", *((char*)str+j));
