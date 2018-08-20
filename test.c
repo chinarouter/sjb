@@ -85,6 +85,10 @@ int main(int argc, char *argv[])
   ELE_VAL(f.creams[1].string3) = 2;
   strcpy(f.creams[1].string3[0][1], "f.creams_1.string3_0_1");
   
+  
+   f.creams[1].sweetType = 1;
+   strcpy(f.creams[1].str_sweet, "str_sweet");
+  
 
   snprintf(f.cream.name, sizeof(f.cream.name), "%s", "cream11111111");
   ELE_VAL(f.cream.picture) = 3;
@@ -139,6 +143,12 @@ int main(int argc, char *argv[])
     {
       printf("fr.creams[%d].array64[%d]:[%llx]\n", i, j, fr.creams[i].array64[j]);
     }
+    
+    printf("fr.creams[%d].sweetType:[%d]\n", i, fr.creams[i].sweetType);
+    if(fr.creams[i].sweetType == 1)
+      printf("fr.creams[%d].str_sweet:[%s]\n", i, fr.creams[i].str_sweet);
+    else if(fr.creams[i].sweetType == 0)
+      printf("fr.creams[%d].u64_sweet:[%llu]\n", i, fr.creams[i].u64_sweet);
     
     printf("fr.creams[%d].picture[%d]\n", i, ELE_SIZE(fr.creams[i].picture));
     char spic[ELE_SIZE(fr.creams[i].picture)*2 + 1] = {0};

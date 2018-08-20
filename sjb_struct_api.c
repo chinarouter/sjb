@@ -293,6 +293,18 @@ typedef char string;
     __ARRAY(TYPE,HOLDER,SIZE,sub,sub[0]?TSIZE:sizeof(TYPE)); \
 }while(0)
 
+#define UNION_B(HOLDER) int HOLDER = -1; do { \
+  if (m) { if(!json) break; cJSON* jani = cJSON_GetObjectItem(json, #HOLDER); sjb_bind_int( jani, m, &(str+i)-> HOLDER, 0, 1);}\
+  else {cJSON* jani = cJSON_CreateObject(); sjb_bind_int( jani, m, &(str+i)-> HOLDER, 0, 1); cJSON_AddItemToObject(json, #HOLDER, jani);}\
+  HOLDER = (str+i)-> HOLDER; \
+}while(0); if(HOLDER != -1) switch(HOLDER) { default: break
+  
+#define UNION_C(COND, TYPE, HOLDER) case COND: { FIELD(TYPE, HOLDER); } break
+#define UNION_S(COND, HOLDER, SIZE) case COND: { STRING(HOLDER, SIZE); } break
+
+#define UNION_E() }
+
+
 #include "sjb_struct_def.h"
 
 #undef STRUCT
@@ -304,3 +316,8 @@ typedef char string;
 #undef ARRAY3
 #undef string
 #undef uint64
+#undef UNION_B
+#undef UNION_C
+#undef UNION_S
+#undef UNION_E
+

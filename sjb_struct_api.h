@@ -23,6 +23,11 @@
 #define uint64        unsigned long long
 #define STRING(X,Y)   char X[Y]
 #define FIELD(X,Y)    X Y
+#define UNION_B(K) int K; union { char __      /* UNION_B(union_type); */
+#define UNION_C(cond, type, val) type val      /* UNION_C(union_type_xxx, type, val); */
+#define UNION_S(cond, val, size) char val[size]/* UNION_S(union_type_xxx, val, size); */ 
+#define UNION_E() }                            /* UNION_E(); */
+
 
 #ifdef __ELE__
 #define __ELE_DEF(e)  int e##__;
@@ -51,5 +56,10 @@ static  int __ele__;  //dummy;
 #undef ARRAY3
 #undef string
 #undef uint64
+#undef UNION_B
+#undef UNION_C
+#undef UNION_S
+#undef UNION_E
+
 
 #endif //__sjb_struct_api_h__

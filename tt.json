@@ -24,7 +24,11 @@
 			"name":	"cream2",
 			"sweetness":	0,
 		  "array64" : [ "f2fffffffffffff1", "f2fffffffffffff2", "f2fffffffffffff3"],
-			"picture":	""
+			"picture":	"",
+
+			"sweetType": 1,
+			"str_sweet": "str_sweet---------2222"
+			  
 		}
   ],
 	"cream":	
