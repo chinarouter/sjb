@@ -23,7 +23,11 @@
 #define uint64        unsigned long long
 #define STRING(X,Y)   char X[Y]
 #define FIELD(X,Y)    X Y
+#if 0 // not define K;
 #define UNION_B(K) int K; union { char __      /* UNION_B(union_type); */
+#else
+#define UNION_B(K)    union { char __          /* UNION_B(union_type); */
+#endif
 #define UNION_C(cond, type, val) type val      /* UNION_C(union_type_xxx, type, val); */
 #define UNION_S(cond, val, size) char val[size]/* UNION_S(union_type_xxx, val, size); */ 
 #define UNION_E() }                            /* UNION_E(); */

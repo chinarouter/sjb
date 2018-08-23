@@ -9,8 +9,12 @@ STRUCT(cream)
   ARRAY2(int, int2, 4, 3);
   ARRAY3(int, int3, 4, 2, 8);
   ARRAY3(string, string3, 4, 2, 64);
-  
+  #if 0 //not define K;
   UNION_B(sweetType);
+  #else
+  FIELD(int, sweetType);
+  UNION_B(sweetType);
+  #endif
   UNION_C(0, uint64, u64_sweet);
   UNION_S(1, str_sweet, 32);
   UNION_E();
