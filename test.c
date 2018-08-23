@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
   snprintf(f.creams[1].name, sizeof(f.creams[1].name), "%s", "cream2");
   
   
-  f.creams[0].sweetness = 0xfffffff1;
+  f.creams[0].sweetness = 0x81;
   f.creams[0].sweetness64 = 0xfffffffffffffff2;
   
   ELE_VAL(f.creams[0].array64) = 2;

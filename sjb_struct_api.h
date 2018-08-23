@@ -21,6 +21,10 @@
                  
 #define string        char
 #define uint64        unsigned long long
+#define uint32        unsigned int
+#define uint16        unsigned short
+#define uint8         unsigned char
+
 #define STRING(X,Y)   char X[Y]
 #define FIELD(X,Y)    X Y
 #if 0 // not define K;
@@ -60,6 +64,9 @@ static  int __ele__;  //dummy;
 #undef ARRAY3
 #undef string
 #undef uint64
+#undef uint32
+#undef uint16
+#undef uint8
 #undef UNION_B
 #undef UNION_C
 #undef UNION_S

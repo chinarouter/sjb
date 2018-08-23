@@ -6,7 +6,7 @@
 	[
 	  {
 			"name":	"cream1",
-			"sweetness":	-1,
+			"sweetness":	-127,
 			"sweetness64": "fffffffffffffff1",
 			"array64" : [ "fffffffffffffff1", "fffffffffffffff2", "fffffffffffffff3"],
 			"picture":	"5152535455",

@@ -9,6 +9,16 @@
 
 typedef void (sjb_bind_T)(cJSON* json, int m, void *str, int i, int size);
 
+
+typedef unsigned long long uint64;
+typedef unsigned int   uint32;
+typedef unsigned short uint16;
+typedef unsigned char  uint8;
+
+#define sjb_bind_uint32  sjb_bind_int
+#define sjb_bind_uint16  sjb_bind_short   
+#define sjb_bind_uint8   sjb_bind_char
+
 void sjb_bind_int(cJSON* json, int m, int *str, int i, int size) 
 {
   if(m)
@@ -51,6 +61,7 @@ void sjb_bind_char(cJSON* json, int m, char *str, int i, int size)
   }
 }
 
+
 void sjb_bind_float(cJSON* json, int m, float *str, int i, int size) 
 {
   if(m)
@@ -79,8 +90,6 @@ void sjb_bind_double(cJSON* json, int m, double *str, int i, int size)
     cJSON_SetIntValue(json, *(str+i));
   }
 }
-
-typedef unsigned long long uint64;
 
 void sjb_bind_uint64(cJSON* json, int m, uint64 *str, int i, int size) 
 {  
@@ -320,6 +329,9 @@ typedef char string;
 #undef ARRAY3
 #undef string
 #undef uint64
+#undef uint32
+#undef uint16
+#undef uint8
 #undef UNION_B
 #undef UNION_C
 #undef UNION_S

@@ -1,7 +1,7 @@
 STRUCT(cream)
 {
   STRING(name, 8);
-  FIELD(int , sweetness);
+  FIELD(uint8 , sweetness);
   FIELD(uint64 , sweetness64);
   ARRAY(uint64 , array64, 3);
   BINARY(picture, 32);
